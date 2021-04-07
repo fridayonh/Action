@@ -23,9 +23,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-      - name: Checkout
-        run: |
-          git clone https://github.com/adw2s/Action.git ~/Scripts
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
@@ -56,9 +53,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-      - name: Checkout
-        run: |
-          git clone https://github.com/adw2s/Action.git ~/Scripts
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
