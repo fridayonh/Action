@@ -1663,14 +1663,14 @@ return new Promise((resolve, reject) => {
     try {
      const cash = JSON.parse(data)
      if(resp.statusCode == 200 && cash.code != -1){
-            if(cash.jinbi >= 500000){
+            if(cash.jinbi >= 5000000){
               $.log('\n🔔金幣查询满足500000金幣\n')
               tip = 50
-              await withDraw()
-            }else if(cash.day_jinbi > 50000){
+              //await withDraw()
+            }else if(cash.day_jinbi > 500000){
               $.log('\n🔔金幣查询满足5000金幣\n')
               tip = 1
-              await withDraw()
+              //await withDraw()
              }
            }
           resolve()
