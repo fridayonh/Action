@@ -23,7 +23,7 @@ if ($.isNode()) {
   Object.keys(BDCookie).forEach((item) => {
         if (BDCookie[item]) {
           CookieArr.push(BDCookie[item])
-        } 
+        }
     })
 } else {
  CookieArr.push($.getdata(`chavy_cookie_tieba`)||$.getdata(`CookieTB`))
@@ -50,7 +50,7 @@ if ($.isNode()) {
       await getRewards();
      //await drawPrize();
   }
- } 
+ }
 })()
     .catch((e) => $.logErr(e))
     .finally(() => $.done())
@@ -67,8 +67,8 @@ function getsign() {
      let get_sign = JSON.parse(data)
      if (get_sign.errno == 0){
          $.sub = get_sign.data.tips+`🎉`
-         $.desc = `签到收益: ${get_sign.data.bonus.coin}💰，`  
-         }  
+         $.desc = `签到收益: ${get_sign.data.bonus.coin}💰，`
+         }
      else if (get_sign.errno == 10053){
          $.sub =  get_sign.msg
           $.desc = ``
@@ -94,7 +94,7 @@ function coinInfo() {
      let get_info = JSON.parse(data)
      if (get_info.errno == 0){
          $.sub += ' 今日收益: ' + get_info.data.datalist.data[0].desc
-         }  
+         }
       resolve()
     })
   })
@@ -111,7 +111,7 @@ function getRewards() {
      if (get_reward.errno == 0&&get_reward.data.coin!==0){
          $.desc += '获得总收益: +' + get_reward.data.coin
          await invite()
-         }  
+         }
        resolve()
     })
   })
@@ -155,7 +155,7 @@ function TaskCenter() {
         if ($.isNode()){
            await $.wait(1000)
            await get_pkg();
-          } 
+          }
 else if(tasks[x].data.countDown[tid].countDown ==0){
            await $.wait(1000)
            await get_pkg();
@@ -207,10 +207,10 @@ function firstbox() {
      //$.log("【首页宝箱】\n"+data +'\n')
      if (get_first.err_no == 0){
          $.desc += "【首页宝箱】"+ get_first.data.result.tips +"， "+get_first.data.result.countdown_time+"秒后再次开启宝箱\n"
-         }  
+         }
       else if (get_first.err_no == 10079){
          $.desc +=  "【首页宝箱】"+ get_first.tip+'\n'
-       }  
+       }
       else if (get_first.err_no == 10060){
          $.desc +=  get_first.tip+'\n'
        }
@@ -237,11 +237,11 @@ function get_pkg() {
        taskid = get_pkg.data.taskPf.taskId;
         //$.log("\n"+taskid +" "+ Pkg)
        await activeBox()
-       }  
+       }
     else if (get_pkg.errno == 0&&get_pkg.data.isDone ==1){
         $.desc += taskName +" 已完成\n"
         $.log(taskName +" 已完成\n")
-       } 
+       }
       resolve()
     })
   })
@@ -259,14 +259,14 @@ function chestTime() {
      let get_chest = JSON.parse(data)
      if (get_chest.errno == 11006){
          $.log("开宝箱任务"+get_chest.errmsg)
-         }  
+         }
        else if (get_chest.errno == 0){
          $.log("开宝箱时间缩减"+get_chest.data.awardTime/60+"分钟")
-         }  
+         }
       else if (get_chest.errno == 19001&&get_chest.data.originData.errno==10074 ){
          //$.desc += get_chest.data.originData.msg
          $.log("开宝箱任务ID:"+taskid+ get_chest.data.originData.msg)
-         }  
+         }
        } catch(e){
         $.logErr(e, data);
       } finally {
@@ -289,7 +289,7 @@ function activeBox2() {
      //$.log('actbox: ' + data)
      if (act_box.errno == 0){
          $.desc += '开宝箱获得收益: +' + act_box.data.coin
- 
+
        } else if (act_box.errno == 10060){
         //taskid = '669'
        await chestTime()
@@ -408,7 +408,7 @@ function doubleBox() {
      let get_doubox = JSON.parse(data)
      if (get_doubox.errno == 0){
          $.desc += '开宝箱获得双倍收益: +' + get_doubox.data.awardCoin
-         }  
+         }
      resolve()
     })
   })
