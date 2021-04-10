@@ -37,6 +37,7 @@ jobs:
 
       - name: '运行 【shu旗小说1】'
         run: |
+          cd ~/Scripts
           node Task/13sqxszy.js
         env:
           duilie: 1
@@ -68,6 +69,7 @@ jobs:
 
       - name: '运行 【shu旗小说2】'
         run: |
+          cd ~/Scripts
           node Task/13sqxszy.js
         env:
           duilie: 2
