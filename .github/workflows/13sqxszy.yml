@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone ${{ secrets.GIT_CLONE_URL }} ~/scripts
+          git clone https://github.com/adw2s/Action.git ~/Scripts
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
@@ -57,7 +57,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone ${{ secrets.GIT_CLONE_URL }} ~/scripts
+          git clone https://github.com/adw2s/Action.git ~/Scripts
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
