@@ -20,12 +20,12 @@ jobs:
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/adw2s/Action.git ~/Scripts
+          git clone ${{ secrets.GIT_CLONE_URL }} ~/scripts
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
@@ -35,7 +35,6 @@ jobs:
           cd ~/Scripts
           npm install -g npm
           npm update
-
       - name: '运行 【shu旗小说1】'
         run: |
           cd ~/Scripts
@@ -58,7 +57,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/adw2s/Action.git ~/Scripts
+          git clone ${{ secrets.GIT_CLONE_URL }} ~/scripts
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
@@ -68,8 +67,6 @@ jobs:
           cd ~/Scripts
           npm install -g npm
           npm update
-
-
       - name: '运行 【shu旗小说2】'
         run: |
           cd ~/Scripts
