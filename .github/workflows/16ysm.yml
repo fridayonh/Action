@@ -27,7 +27,7 @@ jobs:
           npm install
       - name: '运行 【中青看点】'
         run: |
-          node Task/ysm.js
+          node Task/16ysm.js
         env:
           ysmbd: ${{ secrets.ysmbd }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
