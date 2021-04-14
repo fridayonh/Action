@@ -20,7 +20,6 @@ jobs:
         with:
           node-version: 12.x
       - name: npm install
-        if: env.MMDZZURL
         run: |
           npm install
       - name: '运行 【中青看点】'
