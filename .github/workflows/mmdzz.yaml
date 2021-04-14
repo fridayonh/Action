@@ -14,15 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
+      - uses: actions/checkout@v1
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
       - name: npm install
+        if: env.MMDZZURL
         run: |
-          npm install -g npm
-          npm update
-      - name: '运行 【mmdzz】'
+          npm install
+      - name: '运行 【中青看点】'
         if: env.MMDZZURL
         run: |
           node mmdzz.js
