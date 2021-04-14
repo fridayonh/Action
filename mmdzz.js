@@ -48,8 +48,8 @@ let mmdzzhd = process.env.mmdzzhd
   if (typeof $request !== "undefined") {
     await mmdzzck()
    
-  } else {mmdzzurlArr.push($.getdata('mmdzzurl'))
-    mmdzzhdArr.push($.getdata('mmdzzhd'))
+  } else {mmdzzurlArr.push(mmdzzurl)
+    mmdzzhdArr.push(mmdzzhd)
     let mmdzzcount = ($.getval('mmdzzcount') || '1');
   for (let i = 2; i <= mmdzzcount; i++) {
     mmdzzurlArr.push($.getdata(`mmdzzurl${i}`))
