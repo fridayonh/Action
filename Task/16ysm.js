@@ -5,79 +5,48 @@
 脚本为自动完成云扫码的阅读任务
 每日收益1元左右，可多号撸。提现秒到
 可以多个阅读平台同时跑脚本，如番茄看看和微客众智
-
 任务打开二维码地址 https://raw.githubusercontent.com/age174/-/main/3B7C4F94-B961-4690-8DF7-B27998789124.png
 微信扫描打开，保存临时码，再去扫码获取数据
-
 可以先点阅读任务旁边的关注任务,关注三个公众号先提现三毛再说
-
 本脚本以学习为主！
 首次运行脚本，会提示获取数据
 去云扫码，首页自动获取数据,
 如果mitm没填写获取不到任务,可以到mitm界面添加一个为*的主机名
 获取成功数据之后请删除*
-
 TG电报群: https://t.me/hahaha8028
-
 3.1更新增加是否有阅读任务的判断
 加入自动兑换和自动提现，当前金币大于等于3000会自动提现，请自行去获取提现数据，方法，进入云扫码，成功提现一次获取数据成功
 解决多账号问题，可以多账号撸了
 3.2更新,新增判断，如果提示当前任务已结束脚本会尝试继续执行不会终止循环，key提交提示失败也会尝试重新执行，增加了提现成功的通知
 3.8更新，修复因官方更新无法提交key和领取任务奖励的问题
 3.9更新 修复云扫码官方更新无法自动阅读的问题
-
 3.18更新，新增判断云扫码每日首次运行脚本是否手动阅读过两篇文章，如果阅读过两篇文章脚本继续执行任务，否则结束
-
 3.26更新，云扫码多账号更新优化，加入多账号并发执行，获取ck方式改为和番茄看看一样的方式，不用手动选择抓包账号几，加入通知开关和首次阅读开关限制，自定义提现金额，比例为1:10000，最低提现金额为0.3元，即填写提现金额最少填写3000，注意需要重新更改重写的链接，请在下方获取替换以前的重写，该版本为@ztxtop大佬提交的pr。感谢大佬
-
 3.31更新,修复官方域名更换无法正常跑脚本的问题，请更换一下重写重新抓包
 PS:
 一般两篇文章过后还能阅读那么当天一般都能跑满任务的，需要手动阅读两篇的原因是和番茄看看一样，前两篇文章是调用微信接口鉴权的(这个没有办法解决)，鉴权通过可以继续阅读，不通过则限制阅读(如果你不手动阅读鉴权,直接跑脚本很大几率直接就限制了)，云扫码和番茄看看鉴权通过的话是不会有任务冲突的，一般情况下这两个平台手动阅读了两篇文章都能跑满全部任务。阅读三兄弟的微客众智则不需要手动阅读可以直接跑脚本(可惜ck过期太快，但是不会限制，我的ck最长坚持了四天，有些人就只能坚持一天，建议微客众智的重写保持开启状态。)
-
 boxjs地址 :  
-
 https://raw.githubusercontent.com/age174/-/main/feizao.box.json
-
-
 云扫码
 圈X配置如下，其他软件自行测试，定时可以多设置几次，没任务会停止运行的
 [task_local]
 #云扫码
 15 12,14,16,20,22 * * * https://raw.githubusercontent.com/age174/-/main/ysm.js, tag=云扫码, img-url=https://raw.githubusercontent.com/erdongchanyo/icon/main/taskicon/Yunsaoma.png, enabled=true
-
-
 [rewrite_local]
 #云扫码
 ^http://.+?[^/]/yunonline/v\d+/redirect/(?!undefined) url script-request-header https://raw.githubusercontent.com/age174/-/main/ysm.js
-
-
-
 #loon
 ^http://.+?[^/]/yunonline/v\d+/redirect/(?!undefined) script-path=https://raw.githubusercontent.com/age174/-/main/ysm.js, requires-body=true, timeout=10, tag=云扫码
-
-
-
 #surge
-
 云扫码 = type=http-request,pattern=^http://.+?[^/]/yunonline/v\d+/redirect/(?!undefined),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/age174/-/main/ysm.js,script-update-interval=0
-
-
 */
 
 const $ = new Env('云扫码')
-let ysm = getjson('[
-  {
-    "openid": "oksnzwcl38nYHDkCJP4sRMXhcTSo",
-    "domain": "http://aaa.saomayun.com.cn/yunonline/v1/",
-    "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.4(0x18000426) NetType/WIFI Language/zh_CN",
-    "secret": "eyJpdiI6Ik51dDF4bWo2T0lSSFlTalZZWGZ6a3c9PSIsInZhbHVlIjoiaWJpTk1kQ1huTlRTY09TWWNRazREMm03MXlabllJekFcL3BJeTVlUFwvejFcLzd5aDNEMU5jNHV4K2k5RHlsSzd4VERaR0pUYjhEeXlRWUZjbXE3Z3NsTW9vaGMwMlhDcmZRQWk2R0c0QUl4Tm9TV2VZNFhwNzJzWEs2V1NiVjlRVDlhdUR2aUtQeUlxUEkrU2sycjNUNlROZDAwNCtBR3kra2Njd0tnRE5OSUlaZ3htQis5NlpxZ05QN1Q3TzJrTXlMYmhBTytrVGR6VkI3a2krczJmQ2FGWXZzV255aWhaNlMrZDBNS1wvckl1RFZQaUgzZHlvaGRRc29BVVFcL1R1XC84ZDllblQ5aGszTkZ1SzhCOHRJQzN2bzBtSjhaeCtBOFZOXC9PeVNicTBLaWZ0M0xGV1wvY0h4SGswU014aFwvUng2WjJ1YjNhaE8xMHJNaEFnOXRqSHdZVzU3RnIwVkl6a09Xdll6T3lZWGdzOWU5Tjk4ck1Eb3NMM0R1eEFmWmkxeU9hYlNkUzFOXC9xcEJzTlFrejhcL2krMDhRPT0iLCJtYWMiOiIxNDY5MGEyYTZiZTExNmMxMWM4MmRmNzBjMzVmODM3Yzk4NzJhYjdjZWNmMjMyZTExZjljNjQxMTU5MGYwNjExIn0%3D",
-    "txbody": "openid=oksnzwcl38nYHDkCJP4sRMXhcTSo&request_id=227893375a6cc7b8693188b89bdcd12e&ua=1"
-  }
-]', [])
+let ysm = $.getjson('ysm', [])
 let needNotice = $.getval('ysmNotice') == 'true'
 let ysmBanfirstTask = $.getval('ysmBanfirstTask') == 'true' // 禁止脚本执行首个任务，避免每日脚本跑首次任务导致微信限制
 let ysmBanhalfTask = $.getval('ysmBanhalfTask') == 'true' // 脚本执行完第50个任务时退出任务，再手动阅读2篇避免出现微信限制
-let ysmtxAmt = ($.getval('ysmtxAmt') || '0') - 0  // 此处修改提现金额，0.3元等于3000币，默认不提现
+let ysmtxAmt = ($.getval('ysmtxAmt') || '5000') - 0  // 此处修改提现金额，0.3元等于3000币，默认不提现
 ysmtxAmt = ysmtxAmt > 3000 ? (parseInt(ysmtxAmt / 1000) * 1000) : ysmtxAmt > 0 ? 3000 : 0
 let concurrency = ($.getval('ysmConcurrency') || '1') - 0 // 并发执行任务的账号数，默单账号循环执行
 concurrency = concurrency < 1 ? 1 : concurrency
@@ -95,8 +64,27 @@ const baseHeaders = {
   "X-Requested-With": "XMLHttpRequest"
 }
 
+
+if ($.isNode()) {
+  if (process.env.ysmbd && process.env.ysmbd.indexOf('#') > -1) {
+  ysmbd = process.env.ysmbd.split('#');
+  console.log(`您选择的是用"#"隔开\n`)
+  }
+  else if (process.env.ysmbd && process.env.ysmbd.indexOf('\n') > -1) {
+   ysmbd = process.env.ysmbd.split('\n');
+   console.log(`您选择的是用换行隔开\n`)
+  } else {
+   ysmbd = process.env.ysmbd.split()
+  };
+  Object.keys(ysmbd).forEach((item) => {
+        if (ysmbd[item]) {
+          ysm.push(JSON.parse(ysmbd[item]))
+        }
+    });
+}
+
 !(async () => {
-  if (typeof $request !== "undefined") {
+  if (ysm == "") {
     await ysmck()
   } else if (moveData) {
     await ysmckMove()
