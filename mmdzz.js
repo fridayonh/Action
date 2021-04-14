@@ -52,8 +52,8 @@ let mmdzzhd = process.env.mmdzzhd
     mmdzzhdArr.push(mmdzzhd)
     let mmdzzcount = ($.getval('mmdzzcount') || '1');
   for (let i = 2; i <= mmdzzcount; i++) {
-    mmdzzurlArr.push($.getdata(`mmdzzurl${i}`))
-    mmdzzhdArr.push($.getdata(`mmdzzhd${i}`))
+    mmdzzurlArr.push(mmdzzurl)
+    mmdzzhdArr.push(mmdzzhd)
   }
     console.log(`------------- 共${mmdzzhdArr.length}个账号-------------\n`)
       for (let i = 0; i < mmdzzhdArr.length; i++) {
