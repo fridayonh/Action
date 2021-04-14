@@ -17,18 +17,18 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-      - name: Checkout
-      - name: Use Node.js 12.x
+      - uses: actions/checkout@v1
+      - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: 14.x
       - name: npm install
         run: |
-          npm install -g npm
-          npm update
-      - name: '运行 【16ysm(云扫码)】'
+          npm install
+      - name: '运行 【中青看点】'
+        if: env.YOUTH_HEADER
         run: |
-          node Task/16ysm.js
+          node Task/ysm.js
         env:
           ysmbd: ${{ secrets.ysmbd }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
