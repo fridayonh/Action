@@ -18,20 +18,16 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - name: Checkout
-        run: |
-          git clone ${{ secrets.GIT_CLONE_URL }} ~/Scripts
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
       - name: npm install
         run: |
-          cd ~/Scripts
           npm install -g npm
           npm update
       - name: '运行 【16ysm(云扫码)】'
         run: |
-          cd ~/Scripts
           node Task/16ysm.js
         env:
           ysmbd: ${{ secrets.ysmbd }}
