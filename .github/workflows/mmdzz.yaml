@@ -26,7 +26,6 @@ jobs:
       - name: '运行 【mmdzz】'
         if: env.MMDZZURL
         run: |
-          cd ~/Scripts
           node Task/mmdzz.js
         env:
           MMDZZURL: ${{ secrets.YSMURL }}
