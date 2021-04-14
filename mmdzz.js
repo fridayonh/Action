@@ -42,8 +42,8 @@ let status;
 status = (status = ($.getval("mmdzzstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
 const mmdzzurlArr = [], mmdzzhdArr = [],mmdzzcount = ''
 let times = Math.round(Date.now() / 1000)
-let mmdzzurl = progrss.env.mmdzzurl
-let mmdzzhd = progrss.env.mmdzzhd
+let mmdzzurl = process.env..mmdzzurl
+let mmdzzhd = process.env.mmdzzhd
 !(async () => {
   if (typeof $request !== "undefined") {
     await mmdzzck()
