@@ -25,10 +25,10 @@ jobs:
       - name: '运行 【mmdzz】'
         if: env.MMDZZURL
         run: |
-          node Task/mmdzz.js
+          node mmdzz.js
         env:
-          MMDZZURL: ${{ secrets.YSMURL }}
-          MMDZZHD: ${{ secrets.YSMHD }}
+          MMDZZURL: ${{ secrets.MMDZZURL }}
+          MMDZZHD: ${{ secrets.MMDZZHD }}
           YSMBODY: ${{ secrets.YSMBODY }}
           YSM2BODY: ${{ secrets.YSM2BODY }}
           YSMTX: ${{ secrets.YSMTX }}
