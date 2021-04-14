@@ -71,7 +71,15 @@ hostname = .*.top
 */
 
 const $ = new Env('云扫码')
-let ysm = $.getjson('ysm', [])
+let ysm = [
+  {
+    "openid": "oksnzwcl38nYHDkCJP4sRMXhcTSo",
+    "domain": "http://aaa.saomayun.com.cn/yunonline/v1/",
+    "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.4(0x18000426) NetType/WIFI Language/zh_CN",
+    "secret": "eyJpdiI6Ik51dDF4bWo2T0lSSFlTalZZWGZ6a3c9PSIsInZhbHVlIjoiaWJpTk1kQ1huTlRTY09TWWNRazREMm03MXlabllJekFcL3BJeTVlUFwvejFcLzd5aDNEMU5jNHV4K2k5RHlsSzd4VERaR0pUYjhEeXlRWUZjbXE3Z3NsTW9vaGMwMlhDcmZRQWk2R0c0QUl4Tm9TV2VZNFhwNzJzWEs2V1NiVjlRVDlhdUR2aUtQeUlxUEkrU2sycjNUNlROZDAwNCtBR3kra2Njd0tnRE5OSUlaZ3htQis5NlpxZ05QN1Q3TzJrTXlMYmhBTytrVGR6VkI3a2krczJmQ2FGWXZzV255aWhaNlMrZDBNS1wvckl1RFZQaUgzZHlvaGRRc29BVVFcL1R1XC84ZDllblQ5aGszTkZ1SzhCOHRJQzN2bzBtSjhaeCtBOFZOXC9PeVNicTBLaWZ0M0xGV1wvY0h4SGswU014aFwvUng2WjJ1YjNhaE8xMHJNaEFnOXRqSHdZVzU3RnIwVkl6a09Xdll6T3lZWGdzOWU5Tjk4ck1Eb3NMM0R1eEFmWmkxeU9hYlNkUzFOXC9xcEJzTlFrejhcL2krMDhRPT0iLCJtYWMiOiIxNDY5MGEyYTZiZTExNmMxMWM4MmRmNzBjMzVmODM3Yzk4NzJhYjdjZWNmMjMyZTExZjljNjQxMTU5MGYwNjExIn0%3D",
+    "txbody": "openid=oksnzwcl38nYHDkCJP4sRMXhcTSo&request_id=227893375a6cc7b8693188b89bdcd12e&ua=1"
+  }
+]
 let needNotice = $.getval('ysmNotice') == 'true'
 let ysmBanfirstTask = $.getval('ysmBanfirstTask') == 'false' // 禁止脚本执行首个任务，避免每日脚本跑首次任务导致微信限制
 let ysmtxAmt = ($.getval('ysmtxAmt') || '5000') - 0  // 此处修改提现金额，0.3元等于3000币，默认不提现
