@@ -42,18 +42,18 @@ let status;
 status = (status = ($.getval("mmdzzstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
 const mmdzzurlArr = [], mmdzzhdArr = [],mmdzzcount = ''
 let times = Math.round(Date.now() / 1000)
-let mmdzzurl = process.env.mmdzzurl
-let mmdzzhd = process.env.mmdzzhd
+let mmdzzurl = "{"ed":"EbI35ZyWY0t/gBhhEQNwo7hKIwGhqh8gRxIz+nlRSUmmJGx1q3FqkSU4iGfFEgCCa1GpYFS/9rDfYlyHK4DtWRUNg+UCCrjatG6yUk/SmYE="}"
+let mmdzzhd = "{"Content-Type":"application/json","Accept":"*/*","Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9kIiwiaWF0IjoxNjE4MzY0NTA0LCJleHAiOjE2MjA5MDI1MDQsIm5iZiI6MTYxODM2NDUwNCwidWlkIjoxMTAyMTYyfQ.wEEljofvAgfTTxnzmVNz9cQuqG6jHQ4PqJm_gFa0y24","Host":"xxlapi.higaoyao.com:553","Accept-Language":"zh-cn","platform":"ios","Accept-Encoding":"gzip, deflate, br","Origin":"https://catxxx.higaoyao.com","versionCode":"33","Referer":"https://catxxx.higaoyao.com/v228/index.html","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148","Content-Length":"117","Connection":"keep-alive"}"
 !(async () => {
   if (typeof $request !== "undefined") {
     await mmdzzck()
    
-  } else {mmdzzurlArr.push(mmdzzurl)
-    mmdzzhdArr.push(mmdzzhd)
+  } else {mmdzzurlArr.push($.getdata('mmdzzurl'))
+    mmdzzhdArr.push($.getdata('mmdzzhd'))
     let mmdzzcount = ($.getval('mmdzzcount') || '1');
   for (let i = 2; i <= mmdzzcount; i++) {
-    mmdzzurlArr.push(mmdzzurl)
-    mmdzzhdArr.push(mmdzzhd)
+    mmdzzurlArr.push($.getdata(`mmdzzurl${i}`))
+    mmdzzhdArr.push($.getdata(`mmdzzhd${i}`))
   }
     console.log(`------------- 共${mmdzzhdArr.length}个账号-------------\n`)
       for (let i = 0; i < mmdzzhdArr.length; i++) {
